@@ -1,0 +1,62 @@
+/*custom */
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Times New Roman';
+  font-weight: bold;
+  font-size: 100px;
+  line-height: 82.49%;
+}
+
+h1 span {
+  font-style: italic;
+}
+
+h2 {
+  font-family: 'Times New Roman';
+  font-style: italic;
+  font-weight: bold;
+  font-size: 24px;
+  padding-left: 2%;
+}
+
+p {
+  font-family: Avenir;
+  font-size: 20px;
+  line-height: 33px;
+}
+
+button {
+  font-family: Avenir;
+  font-size: 18px;
+  width: 211px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-right {
+  margin-left: 30px;
+}
+
+.orange {
+  background: #EE4622;
+  color: white;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.landing {
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-bottom: 3%;
+  background-image: url('./Assets/bg_landing.png');
+  background-repeat: no-repeat;
+  background-position: right;
+}
