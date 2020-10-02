@@ -86,6 +86,10 @@
   height: 30vh;
 }
 
+.img-detailB {
+  height: 50vh;
+}
+
 .btn-orange {
   color: #fff !important;
   background-color: #ee4622 !important;

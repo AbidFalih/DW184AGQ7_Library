@@ -3,21 +3,21 @@ import Library from "../Components/Library";
 
 const Profile = () => {
   return (
-    <div className="container">
+    <div>
       <div className="half-page d-flex flex-column">
         <h3 className="fo-tnr">Profile</h3>
         <div className="jumbotron p-0 my-2 d-flex bg-profile">
-          <div className="m-2 flex-grow-1">
+          <div className="m-2 flex-grow-1 my-auto">
             <div class="d-flex justify-content-start">
               <img
                 className="my-auto"
                 src={require("../Assets/ic_mail.png")}
                 alt="ic-mail"
               />
-              <p className="m-1">
+              <p className="m-1 font-weight-bold">
                 chloegracemoretz@gmail.com
                 <br />
-                Email
+                <small className="text-muted">Email</small>
               </p>
             </div>
             <div class="d-flex justify-content-start">
@@ -26,10 +26,10 @@ const Profile = () => {
                 src={require("../Assets/ic_gender.png")}
                 alt="ic-mail"
               />
-              <p className="m-1">
+              <p className="m-1 font-weight-bold">
                 Female
                 <br />
-                Gender
+                <small className="text-muted">Gender</small>
               </p>
             </div>
             <div class="d-flex justify-content-start">
@@ -38,10 +38,10 @@ const Profile = () => {
                 src={require("../Assets/ic_phone.png")}
                 alt="ic-mail"
               />
-              <p className="m-1">
+              <p className="m-1 font-weight-bold">
                 0896-9876-5432
                 <br />
-                Mobile Phone
+                <small className="text-muted">Mobile Phone</small>
               </p>
             </div>
             <div class="d-flex justify-content-start">
@@ -50,10 +50,10 @@ const Profile = () => {
                 src={require("../Assets/ic_map.png")}
                 alt="ic-mail"
               />
-              <p className="m-1">
+              <p className="m-1 font-weight-bold">
                 Kabupaten Malang Jawa timur
                 <br />
-                Address
+                <small className="text-muted">Address</small>
               </p>
             </div>
           </div>
