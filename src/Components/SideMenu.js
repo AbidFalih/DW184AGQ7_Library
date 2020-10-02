@@ -37,7 +37,7 @@ const SideMenu = () => {
           }}
         />
 
-        <button className="btn btn-outline-success my-4 btn-block">
+        <button className="btn btn-outline-orange my-4 btn-block btn-nav-rounded">
           <RiLogoutBoxLine />
           Logout
         </button>

@@ -21,7 +21,10 @@ const Home = () => {
         <div className="d-flex justify-content-between my-3">
           <h3 className="fo-tnr">List Book</h3>
           <div className="dropdown dropleft">
-            <button className="btn btn-outline-success" data-toggle="dropdown">
+            <button
+              className="btn btn-outline-orange btn-category"
+              data-toggle="dropdown"
+            >
               <FaLessThan /> Category
             </button>
 

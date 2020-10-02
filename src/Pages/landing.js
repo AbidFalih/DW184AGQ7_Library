@@ -33,10 +33,10 @@ function Landing() {
               your book
             </p>
 
-            <button className="btn btn-success" onClick={signUpShow}>
+            <button className="btn btn-orange" onClick={signUpShow}>
               Sign Up
             </button>
-            <button className="btn btn-light mx-5" onClick={signInShow}>
+            <button className="btn btn-grey mx-5" onClick={signInShow}>
               Sign In
             </button>
           </div>
@@ -63,8 +63,8 @@ function Landing() {
               id="password"
               placeholder="Password"
             />
-            <button type="submit" class="btn btn-success btn-block my-3">
-              Submit
+            <button type="submit" class="btn btn-orange btn-block my-3">
+              Sign In
             </button>
           </form>
 
@@ -129,7 +129,7 @@ function Landing() {
               placeholder="Address"
             />
 
-            <button type="submit" class="btn btn-success btn-block my-3">
+            <button type="submit" class="btn btn-orange btn-block my-3">
               Sign Up
             </button>
           </form>

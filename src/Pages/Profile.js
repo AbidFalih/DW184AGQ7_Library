@@ -1,10 +1,11 @@
 import React from "react";
+import Library from "../Components/Library";
 
 const Profile = () => {
   return (
     <div className="container">
       <div className="half-page d-flex flex-column">
-        <h3>Profile</h3>
+        <h3 className="fo-tnr">Profile</h3>
         <div className="jumbotron p-0 my-2 d-flex bg-profile">
           <div className="m-2 flex-grow-1">
             <div class="d-flex justify-content-start">
@@ -62,11 +63,15 @@ const Profile = () => {
               src={require("../Assets/chloe-grace-moretz.jpg")}
               alt="profil-photo"
             />
-            <button className="btn btn-success mx-auto mt-2">
+            <button className="btn btn-orange mx-auto mt-2">
               Change Photo Profile
             </button>
           </div>
         </div>
+      </div>
+      <div>
+        <h3 className="fo-tnr">My Books</h3>
+        <Library />
       </div>
     </div>
   );
