@@ -70,14 +70,12 @@ const DetailBook = () => {
           genre once again in this wholly original fantasy.
         </p>
       </div>
-      <div className="d-flex justify-content-end">
-        <button className="m-2 btn btn-orange">
-          Add library <BsBookmark />
-        </button>
-        <button className="m-2 btn btn-grey">
-          Read Book <GrNext />
-        </button>
-      </div>
+      <button className="m-2 btn btn-grey float-right">
+        Read Book <GrNext />
+      </button>
+      <button className="m-2 btn btn-orange float-right">
+        Add library <BsBookmark />
+      </button>
     </div>
   );
 };

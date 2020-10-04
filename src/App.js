@@ -7,6 +7,7 @@ import MyLibrary from "./Pages/MyLibrary";
 import Profile from "./Pages/Profile";
 import DetailBook from "./Pages/DetailBook";
 import FormAddBook from "./Components/FormAddBook";
+import BookVerification from "./Pages/BookVerification";
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
           <FormAddBook />
         </div>
       </div>
+
+      <BookVerification />
     </div>
   );
 }

@@ -23,6 +23,7 @@ const SideMenu = () => {
             color: "grey",
             backgroundColor: "grey",
             height: 1,
+            width: 230,
           }}
         />
 
