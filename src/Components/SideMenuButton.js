@@ -1,7 +1,7 @@
 import React from "react";
-import icProfile from "../Assets/ic_profile.png";
-import { BsPerson, BsPersonFill, BsBook, BsBookHalf } from "react-icons/bs";
-import { GiBlackBook, GiWhiteBook } from "react-icons/gi";
+import { BsPerson, BsBook } from "react-icons/bs";
+import { GiBlackBook } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const SideMenuButton = () => {
   const buttons = [
@@ -19,15 +19,29 @@ const SideMenuButton = () => {
     },
   ];
 
+  // let { path } = useLocation();
+
+  function navigate(index) {
+    switch (index) {
+      case 0:
+        return "/profile";
+      case 1:
+        return "/library";
+      case 2:
+        return "/addBook";
+    }
+  }
   return (
-    <div>
+    <>
       {buttons.map((button, index) => (
-        <button className="btn btn-outline-orange my-4 btn-block btn-nav-rounded">
-          {button.ic}
-          {button.name}
-        </button>
+        <Link to={navigate(index)} style={{ textDecoration: "none" }}>
+          <button className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded">
+            &nbsp;&nbsp;&nbsp;&nbsp;{button.ic}&nbsp;&nbsp;&nbsp;&nbsp;
+            {button.name}
+          </button>
+        </Link>
       ))}
-    </div>
+    </>
   );
 };
 

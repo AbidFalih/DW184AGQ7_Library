@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import HeaderIcon from "../Components/HeaderIcon";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { BookContext } from "../Context/bookContext";
 
 function Landing() {
   const [signIn, setSignIn] = useState(false);
@@ -13,11 +15,28 @@ function Landing() {
   const signUpShow = () => setSignUp(true);
   const signUpClose = () => setSignUp(false);
 
+  // const [formData, setFormData] = useState({
+  //   email: "asdas",
+  //   password: "asdad",
+  // });
+  // const { emailfd, passwordfd } = formData;
+
+  // let history = useHistory();
+
+  // const [state, dispatch] = useContext(BookContext);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch({
+  //     type: "LOGIN",
+  //   });
+  //   history.push("/home");
+  // };
+
   return (
     <div id="bg-landing">
-      <div className="container pt-3 ml-5 mb-0 h-100">
+      <div className="container pt-3 ml-5 h-100">
         <HeaderIcon />
-        <div className="row h-100">
+        <div className="row" style={{ height: "85vh" }}>
           <div className="my-auto">
             <h1 className="font-weight-bolder h1-landing">
               <span className="font-italic">Your</span> library
@@ -44,13 +63,13 @@ function Landing() {
       </div>
 
       {/* Modal SignIn */}
-      <Modal show={signIn} onHide={signInClose}>
+      <Modal show={signIn} onHide={signInClose} centered>
         <Modal.Header>
           <Modal.Title className="font-weight-bolder">Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
-            {/*belum dikasih preventDefault */}
+            {/* onSubmit={(e) => handleSubmit(e)} */}
             <input
               type="email"
               class="form-control"
@@ -63,9 +82,11 @@ function Landing() {
               id="password"
               placeholder="Password"
             />
-            <button type="submit" class="btn btn-orange btn-block my-3">
-              Sign In
-            </button>
+            <Link to="/home" style={{ textDecoration: "none" }}>
+              <button type="submit" class="btn btn-orange btn-block my-3">
+                Sign In
+              </button>
+            </Link>
           </form>
 
           <p className="text-center">
@@ -85,7 +106,7 @@ function Landing() {
       </Modal>
 
       {/* Modal SignUp */}
-      <Modal show={signUp} onHide={signUpClose}>
+      <Modal show={signUp} onHide={signUpClose} centered>
         <Modal.Header>
           <Modal.Title className="font-weight-bolder">Sign Up</Modal.Title>
         </Modal.Header>
@@ -128,10 +149,11 @@ function Landing() {
               id="address"
               placeholder="Address"
             />
-
-            <button type="submit" class="btn btn-orange btn-block my-3">
-              Sign Up
-            </button>
+            <Link to="/admin" style={{ textDecoration: "none" }}>
+              <button type="submit" class="btn btn-orange btn-block my-3">
+                Sign Up
+              </button>
+            </Link>
           </form>
 
           <p className="text-center">

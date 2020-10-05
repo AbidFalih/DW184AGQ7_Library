@@ -1,66 +1,53 @@
 import React from "react";
 import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Landing from "./Pages/landing";
-import SideMenu from "./Components/SideMenu";
-import Home from "./Pages/Home";
-import MyLibrary from "./Pages/MyLibrary";
-import Profile from "./Pages/Profile";
-import DetailBook from "./Pages/DetailBook";
-import FormAddBook from "./Components/FormAddBook";
 import BookVerification from "./Pages/BookVerification";
+import ContainerMember from "./Pages/ContainerMember";
+import ReadBook from "./Pages/ReadBook";
+import AddBookAdmin from "./Pages/AddBookAdmin";
+import { BookContextProvider } from "./Context/bookContext";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
-    <div>
-      <Landing />
-
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-          <SideMenu />
-        </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
-          <Home />
-        </div>
-      </div>
-
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-          <SideMenu />
-        </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
-          <MyLibrary />
-        </div>
-      </div>
-
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-          <SideMenu />
-        </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
-          <Profile />
-        </div>
-      </div>
-
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-          <SideMenu />
-        </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
-          <DetailBook />
-        </div>
-      </div>
-
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-          <SideMenu />
-        </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
-          <FormAddBook />
-        </div>
-      </div>
-
-      <BookVerification />
-    </div>
+    <BookContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route
+            exact
+            path="/home"
+            render={(props) => <ContainerMember {...props} title="home" />}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={(props) => <ContainerMember {...props} title="profile" />}
+          />
+          <Route
+            exact
+            path="/library"
+            render={(props) => <ContainerMember {...props} title="library" />}
+          />
+          <Route
+            exact
+            path="/addBook"
+            render={(props) => <ContainerMember {...props} title="addBook" />}
+          />
+          <Route
+            exact
+            path="/detailBook"
+            render={(props) => (
+              <ContainerMember {...props} title="detailBook" />
+            )}
+          />
+          <Route exact path="/read" component={ReadBook} />
+          <Route exact path="/admin" component={BookVerification} />
+          <Route exact path="/adminAddBook" component={AddBookAdmin} />
+        </Switch>
+      </BrowserRouter>
+    </BookContextProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Library = () => {
   // belum tahu cara import image selain dijadikan component (?), sedangkan component tidak bisa dimasukkan di books.thumb
@@ -23,15 +24,24 @@ const Library = () => {
       title: "Tess on the Road",
       author: "Rachel Hartman",
     },
-    {
-      thumb: require("../Assets/book_blockchain.png"),
-      title: "Blockchain with Hyperledger",
-      author: "Egi Ganteng",
-    },
   ];
   return (
-    <div className="container">
-      <div className="row row-cols-4">
+    <div>
+      <div className="card-deck mb-3">
+        {books.map((book, index) => (
+          <div className="card mx-5">
+            <Link to="/detailBook" style={{ color: "#000000" }}>
+              <img className="card-img-top" src={book.thumb} alt="book" />
+              <div className="card-body pb-0">
+                <h5>{book.title}</h5>
+                <p>{book.author}</p>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="row row-cols-4">
         {books.map((book) => (
           <div className="col">
             <img src={book.thumb} alt="book" />
@@ -40,7 +50,7 @@ const Library = () => {
             <p>{book.author}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

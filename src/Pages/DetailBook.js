@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import { BsBookmark } from "react-icons/bs";
 import { GrNext } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const DetailBook = () => {
+  const [addToLibrary, setaddToLibrary] = useState(false);
+
+  const addToLibraryShow = () => setaddToLibrary(true);
+  const addToLibraryClose = () => setaddToLibrary(false);
   return (
     <div>
       <div className="half-page d-flex flex-row">
@@ -11,10 +17,10 @@ const DetailBook = () => {
           src={require("../Assets/book_tessOnTheRoad_big.png")}
           alt="big-thumb"
         />
-        <div className="d-flex flex-column justify-content-around py-4">
+        <div className="d-flex flex-column justify-content-around py-4 mx-2">
           <div>
             <h1 className="mb-0 fo-tnr">Tess on the Road </h1>
-            <h6 className="mt-0 text-muted font-weight-normal">
+            <h6 className="mt-0 mb-4 text-muted font-weight-normal">
               Rachel Hartman
             </h6>
           </div>
@@ -35,7 +41,7 @@ const DetailBook = () => {
             <small className="text-muted">436</small>
           </h6>
           <h6>
-            ISBN
+            <span style={{ color: "#EE4622" }}>ISBN</span>
             <br />
             <small className="text-muted">9781789807554</small>
           </h6>
@@ -70,12 +76,27 @@ const DetailBook = () => {
           genre once again in this wholly original fantasy.
         </p>
       </div>
-      <button className="m-2 btn btn-grey float-right">
-        Read Book <GrNext />
-      </button>
-      <button className="m-2 btn btn-orange float-right">
+      <Link to="/read">
+        {" "}
+        <button className="m-2 btn btn-grey float-right">
+          Read Book <GrNext />
+        </button>
+      </Link>
+
+      <button
+        className="m-2 btn btn-orange float-right"
+        onClick={addToLibraryShow}
+      >
         Add library <BsBookmark />
       </button>
+
+      <Modal show={addToLibrary} onHide={addToLibraryClose} centered>
+        <Modal.Body>
+          <p className="text-success text-center pb-0 mb-0">
+            Your book has been added successfully
+          </p>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

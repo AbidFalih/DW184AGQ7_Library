@@ -6,7 +6,7 @@ import Library from "../Components/Library";
 const Home = () => {
   return (
     <div>
-      <div className="bg-home half-page d-flex justify-content-around">
+      <div className="bg-home half-page d-flex justify-content-around jumbotron p-0 my-3">
         <div className="my-auto">
           <h1 className="h1-home">
             Share, read
