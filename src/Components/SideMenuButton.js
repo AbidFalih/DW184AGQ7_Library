@@ -1,7 +1,7 @@
 import React from "react";
 import { BsPerson, BsBook } from "react-icons/bs";
 import { GiBlackBook } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const SideMenuButton = () => {
   const buttons = [
@@ -19,27 +19,39 @@ const SideMenuButton = () => {
     },
   ];
 
-  // let { path } = useLocation();
+  const history = useHistory();
 
-  function navigate(index) {
+  function handleClick(e, index) {
+    let parent = e.parentNode.children;
+    console.log(index);
+    console.log(e);
+    for (let child of parent) {
+      child.classList.remove("active-btn");
+    }
+    e.classList.add("active-btn");
+
     switch (index) {
       case 0:
-        return "/profile";
+        return history.push("/profile");
       case 1:
-        return "/library";
+        return history.push("/library");
       case 2:
-        return "/addBook";
+        return history.push("/addBook");
     }
   }
+
   return (
     <>
       {buttons.map((button, index) => (
-        <Link to={navigate(index)} style={{ textDecoration: "none" }}>
-          <button className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded">
-            &nbsp;&nbsp;&nbsp;&nbsp;{button.ic}&nbsp;&nbsp;&nbsp;&nbsp;
-            {button.name}
-          </button>
-        </Link>
+        // <Link to={navigate(index)} style={{ textDecoration: "none" }}>
+        <button
+          className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded"
+          onClick={(e) => handleClick(e.target, index)}
+        >
+          &nbsp;&nbsp;&nbsp;&nbsp;{button.ic}&nbsp;&nbsp;&nbsp;&nbsp;
+          {button.name}
+        </button>
+        // </Link>
       ))}
     </>
   );

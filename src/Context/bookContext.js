@@ -5,6 +5,7 @@ export const BookContext = createContext();
 const initialState = {
   books: [],
   isLogin: false || localStorage.getItem("isLogin"),
+  isAdmin: false || localStorage.getItem("isAdmin"),
 };
 
 const reducer = (state, action) => {
@@ -15,11 +16,19 @@ const reducer = (state, action) => {
         ...state,
         isLogin: true,
       };
+    case "ADMIN":
+      localStorage.setItem("isAdmin", true);
+      return {
+        ...state,
+        isAdmin: true,
+      };
     case "LOGOUT":
+      localStorage.removeItem("isAdmin");
       localStorage.removeItem("isLogin");
       return {
         ...state,
         isLogin: false,
+        isAdmin: false,
       };
     default:
       throw new Error();

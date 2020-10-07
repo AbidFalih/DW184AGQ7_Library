@@ -7,12 +7,12 @@
 }
 
 #bg-landing p {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 33px;
 }
 
 #bg-landing button {
-  width: 211px;
+  width: 200px;
   height: 50px;
 }
 
@@ -42,8 +42,7 @@
 }
 
 .h1-landing {
-  font-size: 110px;
-  line-height: 82.49%;
+  line-height: 82.49% !important;
   font-family: "Times New Roman";
 }
 
@@ -51,7 +50,7 @@
   font-family: "Times New Roman";
   font-style: italic;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 41px;
 }
 

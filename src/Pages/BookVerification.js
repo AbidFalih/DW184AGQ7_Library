@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeaderIcon from "../Components/HeaderIcon";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsBook } from "react-icons/bs";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { BookContext } from "../Context/bookContext";
 
 const BookVerification = () => {
+  const [, dispatch] = useContext(BookContext);
+
   return (
     <div className="mx-5 my-3">
       <div className="d-flex flex-column">
@@ -25,7 +28,10 @@ const BookVerification = () => {
                 <BsBook />
                 &nbsp;&nbsp;&nbsp;Add Book
               </Link>
-              <Link class="dropdown-item" to="/">
+              <Link
+                class="dropdown-item"
+                onClick={() => dispatch({ type: "LOGOUT" })}
+              >
                 <RiLogoutBoxLine style={{ color: "red" }} />
                 &nbsp;&nbsp;&nbsp;Logout
               </Link>

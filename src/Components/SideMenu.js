@@ -3,11 +3,10 @@ import HeaderIcon from "./HeaderIcon";
 import SideMenuButton from "./SideMenuButton";
 import ChloeGM from "../Assets/chloe-grace-moretz.jpg";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
 import { BookContext } from "../Context/bookContext";
 
 const SideMenu = () => {
-  const [state, dispatch] = useContext(BookContext);
+  const [, dispatch] = useContext(BookContext);
 
   return (
     <div className="container pt-3 full-page">
@@ -41,13 +40,14 @@ const SideMenu = () => {
           }}
         />
 
-        <Link to="/" className="link-noDec">
-          <button className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <RiLogoutBoxLine />
-            &nbsp;&nbsp;&nbsp;&nbsp; Logout
-          </button>
-        </Link>
+        <button
+          className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded"
+          onClick={() => dispatch({ type: "LOGOUT" })}
+        >
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <RiLogoutBoxLine />
+          &nbsp;&nbsp;&nbsp;&nbsp; Logout
+        </button>
       </>
     </div>
   );

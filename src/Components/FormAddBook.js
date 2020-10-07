@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CgAttachment } from "react-icons/cg";
 import { BsBook } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
+import { BookContext } from "../Context/bookContext";
+import { useHistory } from "react-router-dom";
 
 const FormAddBook = () => {
   const [addBook, setaddBook] = useState(false);
+  const [state] = useContext(BookContext);
 
-  const addBookShow = () => setaddBook(true);
-  const addBookClose = () => setaddBook(false);
+  const history = useHistory();
 
   return (
     <div>
@@ -36,12 +38,6 @@ const FormAddBook = () => {
             <option value="history">History</option>
             <option value="documentary">Documentary</option>
           </select>
-          {/* <input
-            type="text"
-            class="form-control my-4"
-            id="category"
-            placeholder="Category"
-          /> */}
           <input
             class="form-control"
             type="number"
@@ -60,20 +56,27 @@ const FormAddBook = () => {
             rows="4"
             placeholder="About This Book"
           ></textarea>
-          <button type="submit" class="btn btn-grey d-block my-4 p-2">
+          <button class="btn btn-grey d-block my-4 p-2">
             Attache Book File &nbsp;&nbsp;
             <CgAttachment style={{ verticalAlign: "baseline" }} />
           </button>
           <button
             className="btn btn-orange float-right p-2"
-            onClick={addBookShow}
+            onClick={() => setaddBook(true)}
           >
             Add Book&nbsp;&nbsp;
             <BsBook style={{ verticalAlign: "baseline" }} />
           </button>
         </form>
 
-        <Modal show={addBook} onHide={addBookClose} centered>
+        <Modal
+          show={addBook}
+          onHide={() => {
+            setaddBook(false);
+            if (state.isAdmin) history.push("/admin");
+          }}
+          centered
+        >
           <Modal.Body>
             <p className="text-success text-center">
               Thank you for adding your own book to our website, please

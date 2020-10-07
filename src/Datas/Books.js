@@ -1,0 +1,43 @@
+export const Books = [
+  {
+    thumb: require("../Assets/book_whatIf.png"),
+    title: "What if? Absurd Question",
+    author: "Randall Munroe",
+    publicationDate: "January 2020",
+    category: "Comedy",
+    pages: 523,
+    isbn: "210984108724",
+    desc: "this is book's desc about What If",
+  },
+  {
+    thumb: require("../Assets/book_glyph.png"),
+    title: "Glyph: New look on Things",
+    author: "Morris Williamson",
+    publicationDate: "September 2020",
+    category: "Documentation",
+    pages: 367,
+    isbn: "871592803172",
+    desc: "this is book's desc about glyph",
+  },
+  {
+    thumb: require("../Assets/book_gobletOfFire.png"),
+    title: "Harry Potter and Goblet of Fire",
+    author: "J. K. Rownling",
+    publicationDate: "August 2020",
+    category: "Romance",
+    pages: 987,
+    isbn: "3598308519015",
+    desc: "this is book's desc about gobletOfFire",
+  },
+  {
+    thumb: require("../Assets/book_tessOnTheRoad.png"),
+    title: "Tess on the Road",
+    author: "Rachel Hartman",
+    publicationDate: "April 2020",
+    category: "Sci-Fi",
+    pages: 436,
+    isbn: "9781789807554",
+    desc:
+      "In the medieval kingdom of Goredd, women are expected to be ladies, men are their protectors, and dragons get to be whomever they want. Tess, stubbornly, is a troublemaker. You can’t make a scene at your sister’s wedding and break a relative’s nose with one punch (no matter how pompous he is) and not suffer the consequences. As her family plans to send her to a nunnery, Tess yanks on her boots and sets out on a journey across the Southlands, alone and pretending to be a boy.\nWhere Tess is headed is a mystery, even to her. So when she runs into an old friend, it’s a stroke of luck. This friend is a quigutl—a subspecies of dragon—who gives her both a purpose and protection on the road. But Tess is guarding a troubling secret. Her tumultuous past is a heavy burden to carry, and the memories she’s tried to forget threaten to expose her to the world in more ways than one.\nReturning to the fascinating world she created in the award-winning and New York Times bestselling Seraphina, Rachel Hartman introduces readers to a new character and a new quest, pushing the boundaries of genre once again in this wholly original fantasy.",
+  },
+];
