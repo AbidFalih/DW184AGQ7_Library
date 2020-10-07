@@ -9,7 +9,7 @@ const Profile = () => {
         <SideMenu />
       </div>
       <div class="p-2 flex-grow-1 bd-highlight">
-        <div>
+        <div className="d-flex flex-column">
           <div className="half-page d-flex flex-column my-3">
             <h3 className="fo-tnr">Profile</h3>
             <div className="jumbotron p-0 py-4 px-5 d-flex bg-profile">
@@ -67,7 +67,7 @@ const Profile = () => {
                 <img
                   className="img-profile-big"
                   src={require("../Assets/chloe-grace-moretz.jpg")}
-                  alt="profil-photo"
+                  alt="big-chloe"
                 />
                 <button className="btn btn-block btn-orange mx-auto mt-2">
                   Change Photo Profile
@@ -75,8 +75,8 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div>
-            <h3 className="fo-tnr mb-3">My Books</h3>
+          <div className="my-2">
+            <h3 className="fo-tnr my-3">My Books</h3>
             <Library />
           </div>
         </div>

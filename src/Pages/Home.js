@@ -37,7 +37,11 @@ const Home = () => {
               </h1>
               <p className="p1-home">Reading is fascinating</p>
             </div>
-            <img src={bkFixYou} className="home-book my-auto" />
+            <img
+              src={bkFixYou}
+              className="home-book my-auto"
+              alt="jumbotron-book"
+            />
           </div>
           <div>
             <div className="d-flex justify-content-between my-3">

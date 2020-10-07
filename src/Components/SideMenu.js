@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import { BookContext } from "../Context/bookContext";
 import HeaderIcon from "./HeaderIcon";
 import SideMenuButton from "./SideMenuButton";
-import ChloeGM from "../Assets/chloe-grace-moretz.jpg";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { BookContext } from "../Context/bookContext";
+import { BsPerson, BsBook } from "react-icons/bs";
+import { GiBlackBook } from "react-icons/gi";
+import ChloeGM from "../Assets/chloe-grace-moretz.jpg";
 
 const SideMenu = () => {
   const [, dispatch] = useContext(BookContext);
+
+  const history = useHistory();
+  let path = ["/profile", "/library", "/addBook"];
 
   return (
     <div className="container pt-3 full-page">
@@ -29,7 +35,24 @@ const SideMenu = () => {
             width: 210,
           }}
         />
-        <SideMenuButton />
+        <SideMenuButton
+          icon={<BsPerson />}
+          name="Profile"
+          active={useRouteMatch(path[0])} //jika benar, akan mengembalikan object == true
+          onClick={() => history.push(path[0])}
+        />
+        <SideMenuButton
+          icon={<GiBlackBook />}
+          name="My Library"
+          active={useRouteMatch(path[1])}
+          onClick={() => history.push(path[1])}
+        />
+        <SideMenuButton
+          icon={<BsBook />}
+          name="Add Book"
+          active={useRouteMatch(path[2])}
+          onClick={() => history.push(path[2])}
+        />
         <hr
           className="my-4"
           style={{
@@ -40,14 +63,11 @@ const SideMenu = () => {
           }}
         />
 
-        <button
-          className="text-left btn btn-outline-orange my-4 btn-block btn-nav-rounded"
+        <SideMenuButton
+          icon={<RiLogoutBoxLine />}
+          name="Logout"
           onClick={() => dispatch({ type: "LOGOUT" })}
-        >
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <RiLogoutBoxLine />
-          &nbsp;&nbsp;&nbsp;&nbsp; Logout
-        </button>
+        />
       </>
     </div>
   );

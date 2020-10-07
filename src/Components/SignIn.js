@@ -16,9 +16,10 @@ const SignIn = (props) => {
 
   const history = useHistory();
 
+  //a .map() creates array, if didn't want an array or to return data, use forEach instead
   const handleSubmit = (e) => {
     e.preventDefault();
-    Users.map((user) => {
+    Users.forEach((user) => {
       if (email === user.email && password === user.pass) {
         dispatch({
           type: "LOGIN",
