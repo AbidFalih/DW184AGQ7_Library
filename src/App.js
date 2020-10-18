@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { BookContextProvider } from "./Context/bookContext";
 import { PrivateRoute, AdminRoute } from "./Components/PrivateRoute";
 
 //pages
@@ -16,23 +15,48 @@ import MyLibrary from "./Pages/MyLibrary";
 import AddBookMember from "./Pages/AddBookMember";
 import DetailBook from "./Pages/DetailBook";
 
+import { API, setAuthToken } from "./Config/api";
+
+import { BookContext } from "./Context/bookContext";
+
+//if token available
+if (localStorage.token) setAuthToken(localStorage.token);
+
 function App() {
+  const [state, dispatch] = useContext(BookContext);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await API.get("/auth");
+
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.user,
+        });
+      } catch (err) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+    };
+
+    loadUser();
+  }, []);
   return (
-    <BookContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <PrivateRoute exact path="/home" component={Home} />
-          <PrivateRoute exact path="/profile" component={Profile} />
-          <PrivateRoute exact path="/library" component={MyLibrary} />
-          <PrivateRoute exact path="/addBook" component={AddBookMember} />
-          <PrivateRoute exact path="/detailBook/:id" component={DetailBook} />
-          <PrivateRoute exact path="/read" component={ReadBook} />
-          <AdminRoute exact path="/admin" component={BookVerification} />
-          <AdminRoute exact path="/adminAddBook" component={AddBookAdmin} />
-        </Switch>
-      </BrowserRouter>
-    </BookContextProvider>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <PrivateRoute exact path="/home" component={Home} />
+        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/library" component={MyLibrary} />
+        <PrivateRoute exact path="/addBook" component={AddBookMember} />
+        <PrivateRoute exact path="/detailBook/:id" component={DetailBook} />
+        <PrivateRoute exact path="/read" component={ReadBook} />
+        <AdminRoute exact path="/admin" component={BookVerification} />
+        <AdminRoute exact path="/adminAddBook" component={AddBookAdmin} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

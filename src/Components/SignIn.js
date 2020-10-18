@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { API, setAuthToken } from "../Config/api";
 import { BookContext } from "../Context/bookContext";
 import Users from "../Datas/Users.json";
 
@@ -17,22 +18,62 @@ const SignIn = (props) => {
   const history = useHistory();
 
   //a .map() creates array, if didn't want an array or to return data, use forEach instead
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    Users.forEach((user) => {
-      if (email === user.email && password === user.pass) {
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    const body = JSON.stringify({ email, password });
+
+    try {
+      const res = await API.post("/login", body, config);
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: res.data.data,
+      });
+
+      setAuthToken(res.data.data.token);
+
+      try {
+        const res = await API.get("/auth");
+
         dispatch({
-          type: "LOGIN",
+          type: "USER_LOADED",
+          payload: res.data.user,
         });
-        if (user.admin) {
-          dispatch({
-            type: "ADMIN",
-          });
-          return history.push("/admin");
-        }
-        return history.push("/home");
+      } catch (err) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
       }
-    });
+
+      if (res.data.data.isAdmin) {
+        dispatch({
+          type: "ADMIN",
+        });
+        return history.push("/admin");
+      }
+      return history.push("/home");
+    } catch (err) {
+      dispatch({
+        type: "LOGIN_FAIL",
+      });
+    }
+    // Users.forEach((user) => {
+    //   if (email === user.email && password === user.pass) {
+    //     dispatch({
+    //       type: "LOGIN",
+    //     });
+    //     if (user.admin) {
+    //       dispatch({
+    //         type: "ADMIN",
+    //       });
+    //       return history.push("/admin");
+    //     }
+    //     return history.push("/home");
+    //   }
+    // });
   };
 
   return (

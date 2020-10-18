@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { BookContext } from "../Context/bookContext";
+import { BoxLoading } from "react-loadingg";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const [state] = useContext(BookContext);
@@ -9,7 +10,13 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        state.isLogin ? <Component {...props} /> : <Redirect to="/" />
+        state.loading ? (
+          <BoxLoading />
+        ) : state.isLogin ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
       }
     />
   );
@@ -22,7 +29,13 @@ export const AdminRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        state.isAdmin ? <Component {...props} /> : <Redirect to="/home" />
+        state.loading ? (
+          <BoxLoading />
+        ) : state.isAdmin ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/home" />
+        )
       }
     />
   );

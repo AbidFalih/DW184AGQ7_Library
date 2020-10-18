@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BookContextProvider } from "./Context/bookContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BookContextProvider>
+      <App />
+    </BookContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
