@@ -1,25 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import bkFixYou from "../Assets/book_fixYou.png";
 import { FaLessThan } from "react-icons/fa";
 import Library from "../Components/Library";
 import SideMenu from "../Components/SideMenu";
 import { Books } from "../Datas/Books";
+import { useQuery } from "react-query";
+import { API } from "../Config/api";
+import { BoxLoading } from "react-loadingg";
 
 const Home = () => {
+  const { isLoading, error, data: books } = useQuery("getBooks", () =>
+    API.get("/books")
+  );
+  const {
+    isLoading: isLoading2,
+    error: error2,
+    data: categories,
+  } = useQuery("getCategories", () => API.get("/categories"));
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  if (isLoading || isLoading2) return <BoxLoading />;
+  if (error) return "An error has occured: " + error.message;
+  if (error2) return "An error has occured: " + error2.message;
+
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   //https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
 
-  let dropdownItem = Books.map((book) => book.category)
-    .filter(onlyUnique)
-    .map((category) => {
-      return (
-        <a class="dropdown-item" href="#">
-          {category}
-        </a>
-      );
-    });
+  let bookFound = false;
 
   return (
     <div class="mx-5 my-2 d-flex bd-highlight">
@@ -55,26 +65,46 @@ const Home = () => {
                 </button>
 
                 <div class="dropdown-menu">
-                  {dropdownItem}
-                  {/* <a class="dropdown-item" href="#">
-                    Romance
+                  <a
+                    className="dropdown-item"
+                    role="button"
+                    onClick={() => setSelectedCategory("all")}
+                  >
+                    All
                   </a>
-                  <a class="dropdown-item" href="#">
-                    Comedy
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Sci-Fi
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    History
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Documentary
-                  </a> */}
+                  {categories.data.categories.map((category) => (
+                    <a
+                      className="dropdown-item"
+                      role="button"
+                      onClick={() => setSelectedCategory(category.name)}
+                    >
+                      {category.name}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
-            <Library />
+            <div className="row mb-3">
+              {books.data.books.map((book) => {
+                if (
+                  selectedCategory == "all" ||
+                  book.category.name == selectedCategory
+                ) {
+                  bookFound = true;
+                  return <Library book={book} />;
+                }
+              })}
+              {!bookFound ? (
+                <div className="container">
+                  <p className="text-center">
+                    Sorry, books with category{" "}
+                    <strong>{selectedCategory}</strong> are not exist &#128532;
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>

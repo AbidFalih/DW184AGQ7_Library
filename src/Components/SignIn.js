@@ -3,7 +3,6 @@ import { Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { API, setAuthToken } from "../Config/api";
 import { BookContext } from "../Context/bookContext";
-import Users from "../Datas/Users.json";
 
 const SignIn = (props) => {
   const [, dispatch] = useContext(BookContext);

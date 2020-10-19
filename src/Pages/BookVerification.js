@@ -1,13 +1,48 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import HeaderIcon from "../Components/HeaderIcon";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsBook } from "react-icons/bs";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { BookContext } from "../Context/bookContext";
+import { useQuery, useMutation } from "react-query";
+import { API } from "../Config/api";
+import { BoxLoading } from "react-loadingg";
 
 const BookVerification = () => {
   const [, dispatch] = useContext(BookContext);
+  const [status, setStatus] = useState("");
+  const [bookId, setBookId] = useState(null);
+
+  const [patchBook] = useMutation(async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify({ status });
+      const res = await API.patch(`/book/${bookId}`, body, config);
+
+      refetch();
+      return res;
+    } catch (err) {
+      alert(`Error: ${err}`);
+    }
+  });
+
+  const { isLoading, error, data: books, refetch } = useQuery("getBooks", () =>
+    API.get("/books")
+  );
+
+  const handleAcc = async (idBook) => {
+    await setStatus("Approved");
+    await setBookId(idBook);
+    patchBook();
+  };
+
+  if (isLoading) return <BoxLoading />;
+  if (error) return "An error has occured: " + error.message;
 
   return (
     <div className="mx-5 my-3">
@@ -52,70 +87,33 @@ const BookVerification = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Randall Munroe</td>
-                <td>9781789807554</td>
-                <td>What If? Absurd Question.pdf</td>
-                <td className="text-success">Approve</td>
-                <td>
-                  <FaCheckCircle style={{ color: "green" }} className="ml-5" />
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Morris Willimson</td>
-                <td>978178907555</td>
-                <td>Glyph.pdf</td>
-                <td className="text-success">Approve</td>
-                <td>
-                  <FaCheckCircle style={{ color: "green" }} className="ml-5" />
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>J.K. Rownling</td>
-                <td>9781789807666</td>
-                <td>Harry Potter.pdf</td>
-                <td className="text-danger">Cancel</td>
-                <td>
-                  <button className="btn btn-danger">Cancel</button>{" "}
-                  <button className="btn btn-success">Approve</button>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Rachel Hartman</td>
-                <td>9781789807576</td>
-                <td>tessonroad.jpg</td>
-                <td className="text-warning">Waiting to be verified</td>
-                <td>
-                  <button className="btn btn-danger">Cancel</button>{" "}
-                  <button className="btn btn-success">Approve</button>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Aziz Oni On</td>
-                <td>9781789807709</td>
-                <td>7ds.jpg</td>
-                <td className="text-warning">Waiting to be verified</td>
-                <td>
-                  <button className="btn btn-danger">Cancel</button>{" "}
-                  <button className="btn btn-success">Approve</button>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Sugeng No Pants</td>
-                <td>9781789807000</td>
-                <td>fixyou.jpg</td>
-                <td className="text-warning">Waiting to be verified</td>
-                <td>
-                  <button className="btn btn-danger">Cancel</button>{" "}
-                  <button className="btn btn-success">Approve</button>
-                </td>
-              </tr>
+              {books.data.books.map((book) => (
+                <tr>
+                  <td>{book.id}</td>
+                  <td>{book.user.fullName}</td>
+                  <td>{book.isbn}</td>
+                  <td>{book.file}</td>
+                  <td>{book.status}</td>
+                  {book.status == "Approved" ? (
+                    <td>
+                      <FaCheckCircle
+                        style={{ color: "green" }}
+                        className="ml-5"
+                      />
+                    </td>
+                  ) : (
+                    <td>
+                      <button className="btn btn-danger">Cancel</button>{" "}
+                      <button
+                        className="btn btn-success"
+                        onClick={() => handleAcc(book.id)}
+                      >
+                        Approve
+                      </button>
+                    </td>
+                  )}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

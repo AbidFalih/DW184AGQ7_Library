@@ -51,7 +51,7 @@ function App() {
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/library" component={MyLibrary} />
         <PrivateRoute exact path="/addBook" component={AddBookMember} />
-        <PrivateRoute exact path="/detailBook/:id" component={DetailBook} />
+        <PrivateRoute exact path="/detailBook/:bookId" component={DetailBook} />
         <PrivateRoute exact path="/read" component={ReadBook} />
         <AdminRoute exact path="/admin" component={BookVerification} />
         <AdminRoute exact path="/adminAddBook" component={AddBookAdmin} />

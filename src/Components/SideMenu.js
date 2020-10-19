@@ -8,23 +8,36 @@ import { BsPerson, BsBook } from "react-icons/bs";
 import { GiBlackBook } from "react-icons/gi";
 import ChloeGM from "../Assets/chloe-grace-moretz.jpg";
 
+import { useQuery } from "react-query";
+import { API } from "../Config/api";
+import { BoxLoading } from "react-loadingg";
+
 const SideMenu = () => {
-  const [, dispatch] = useContext(BookContext);
+  const [state, dispatch] = useContext(BookContext);
+  const { isLoading, data } = useQuery("getUser", () =>
+    API.get(`/user/${state.user.id}`)
+  );
 
   const history = useHistory();
   let path = ["/profile", "/library", "/addBook"];
+
+  // if (isLoading) return <BoxLoading />;
+  // if (error) return "An error has occured: " + error.message;
 
   return (
     <div className="container pt-3 full-page">
       <HeaderIcon />
       <>
         <img
-          src={ChloeGM}
+          // src={ChloeGM}
+          src={!isLoading ? data.data.user.thumb : ""}
           class="rounded-circle mx-auto d-block img-profile mt-4 mb-4"
           alt="chloe"
+          style={{ height: "100px" }}
         />
         <h5 className="text-center mb-4">
-          Chloë Grace Moretz <span className="font-weight-normal">:D</span>
+          {!isLoading ? data.data.user.fullName : ""}
+          {/* Chloë Grace Moretz <span className="font-weight-normal">:D</span> */}
         </h5>
 
         <hr
